@@ -1,0 +1,21 @@
+version: 1
+goal: "Document a small metadata update"
+
+scope:
+  allowed_paths:
+    - docs/
+
+guardrails:
+  require_tests: false
+
+acceptance_criteria:
+  - "Docs build passes"
+
+plan:
+  - step: "Update docs metadata"
+    verify: "npm run docs:build"
+
+outputs:
+  artifacts:
+    - pull_request
+    - audit_log

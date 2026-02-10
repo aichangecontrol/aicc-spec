@@ -1,0 +1,27 @@
+version: 1
+goal: "Normalize API error responses"
+
+scope:
+  allowed_paths:
+    - apps/api/
+    - packages/shared/
+
+guardrails:
+  require_tests: true
+  backward_compatible: true
+
+acceptance_criteria:
+  - "Error payloads include code and message fields"
+  - "Existing clients receive identical status codes"
+
+plan:
+  - step: "Update API error formatter"
+    verify: "npm test"
+  - step: "Add shared helper"
+    verify: "npm test"
+
+outputs:
+  artifacts:
+    - pull_request
+    - test_results
+    - audit_log

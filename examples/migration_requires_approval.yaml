@@ -1,0 +1,28 @@
+version: 1
+goal: "Add customer status history table"
+
+scope:
+  allowed_paths:
+    - apps/api/
+    - infra/
+
+guardrails:
+  require_tests: true
+  no_network: true
+
+acceptance_criteria:
+  - "Migration runs without downtime"
+  - "Status history endpoint returns data for existing customers"
+
+plan:
+  - step: "Create migration for status history"
+    verify: "npm run db:migrate"
+    approval: required
+  - step: "Add status history endpoint"
+    verify: "npm test"
+
+outputs:
+  artifacts:
+    - pull_request
+    - test_results
+    - audit_log
